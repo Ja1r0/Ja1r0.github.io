@@ -104,17 +104,17 @@
 <meta property="og:site_name" content="Jairo">
 <meta property="og:description" content="主要包含raise,assert和try...except结构。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/intro.jpg">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/raise.jpg">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/assert.jpg">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except.jpg">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else.jpg">
-<meta property="og:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else_finally.jpg">
-<meta property="og:updated_time" content="2019-03-06T12:19:12.268Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/intro.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/raise.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/assert.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/try_except.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/try_except_else.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/03/06/python中的异常处理/try_except_else_finally.jpg">
+<meta property="og:updated_time" content="2019-03-06T12:43:28.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中的异常处理">
 <meta name="twitter:description" content="主要包含raise,assert和try...except结构。">
-<meta name="twitter:image" content="c:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/intro.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/06/python中的异常处理/intro.jpg">
 
 
 
@@ -234,6 +234,23 @@
         
         
           
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
 
     
@@ -339,7 +356,7 @@
                 
               
 
-              <time title="创建时间：2019-03-06 20:09:14 / 修改时间：20:19:12" itemprop="dateCreated datePublished" datetime="2019-03-06T20:09:14+08:00">2019-03-06</time>
+              <time title="创建时间：2019-03-06 20:09:14 / 修改时间：20:43:28" itemprop="dateCreated datePublished" datetime="2019-03-06T20:09:14+08:00">2019-03-06</time>
             
 
             
@@ -380,7 +397,8 @@
       
         <p>主要包含<code>raise</code>,<code>assert</code>和<code>try...except</code>结构。</p>
 <a id="more"></a>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文总结python中的异常处理，包含以下内容：<br><img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/intro.jpg" alt></p>
+<p><a href="https://realpython.com/python-exceptions/" target="_blank" rel="noopener">参考链接</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文总结python中的异常处理，包含以下内容：<br><img src="/2019/03/06/python中的异常处理/intro.jpg"></p>
 <ul>
 <li><a href>Exceptions versus Syntax Errors</a></li>
 <li><a href>Raising an Exception</a></li>
@@ -407,17 +425,17 @@
 <li><a href="https://docs.python.org/3/library/exceptions.html" target="_blank" rel="noopener">build-in exceptions</a></li>
 <li>self-defined exceptions</li>
 </ul>
-<h1 id="Raising-an-Exception"><a href="#Raising-an-Exception" class="headerlink" title="Raising an Exception"></a>Raising an Exception</h1><p>用户可以使用<code>raise</code>关键字，当满足所设定的条件时，主动触发异常。<img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/raise.jpg" alt><br><code>raise</code>的使用方式如下：</p>
+<h1 id="Raising-an-Exception"><a href="#Raising-an-Exception" class="headerlink" title="Raising an Exception"></a>Raising an Exception</h1><p>用户可以使用<code>raise</code>关键字，当满足所设定的条件时，主动触发异常。<img src="/2019/03/06/python中的异常处理/raise.jpg"><br><code>raise</code>的使用方式如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line"><span class="keyword">if</span> x &gt; <span class="number">5</span>:</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">'x should not exceed 5.The value of x was: &#123;&#125;'</span>.format(x))</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Exception                                 Traceback (most recent call last)</span><br><span class="line"></span><br><span class="line">&lt;ipython-input-3-36d986f491c4&gt; in &lt;module&gt;()</span><br><span class="line">      1 x = 10</span><br><span class="line">      2 if x &gt; 5:</span><br><span class="line">----&gt; 3     raise Exception(&apos;x should not exceed 5.The value of x was: &#123;&#125;&apos;.format(x))</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception: x should not exceed 5.The value of x was: 10</span><br></pre></td></tr></table></figure>
 <p>程序会在满足<code>raise</code>执行的条件后，执行<code>raise</code>语句。抛出一个错误，并打印出事先写好的错误信息。</p>
-<h1 id="The-AssertionError-Exception"><a href="#The-AssertionError-Exception" class="headerlink" title="The AssertionError Exception"></a>The AssertionError Exception</h1><p>在python脚本的编写中，除了被动的等待程序报错，可以用<code>assert</code>关键字去主动的去探测一些错误，返回更多的与错误有关的信息。<a href="https://dbader.org/blog/python-assert-tutorial" target="_blank" rel="noopener">这里</a>是一篇介绍<code>assert</code>的博客。<code>assert</code>关键字后面会跟一个条件判断，当此条件为真时，程序继续正常执行；当条件为假时，则会抛出一个<code>AssertionError</code>。也就是说，<code>assert</code>语句是要保证脚本运行至此时，满足括号中的条件，如果不满足的话，则触发异常，终止程序。<img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/assert.jpg" alt>见如下例子：</p>
+<h1 id="The-AssertionError-Exception"><a href="#The-AssertionError-Exception" class="headerlink" title="The AssertionError Exception"></a>The AssertionError Exception</h1><p>在python脚本的编写中，除了被动的等待程序报错，可以用<code>assert</code>关键字去主动的去探测一些错误，返回更多的与错误有关的信息。<a href="https://dbader.org/blog/python-assert-tutorial" target="_blank" rel="noopener">这里</a>是一篇介绍<code>assert</code>的博客。<code>assert</code>关键字后面会跟一个条件判断，当此条件为真时，程序继续正常执行；当条件为假时，则会抛出一个<code>AssertionError</code>。也就是说，<code>assert</code>语句是要保证脚本运行至此时，满足括号中的条件，如果不满足的话，则触发异常，终止程序。<img src="/2019/03/06/python中的异常处理/assert.jpg">见如下例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">6</span></span><br><span class="line"><span class="keyword">assert</span> (x == <span class="number">5</span>), <span class="string">"x should equal to 5."</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">AssertionError                            Traceback (most recent call last)</span><br><span class="line"></span><br><span class="line">&lt;ipython-input-4-5d942ae404fb&gt; in &lt;module&gt;()</span><br><span class="line">      1 x = 6</span><br><span class="line">----&gt; 2 assert (x == 5), &quot;x should equal to 5.&quot;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssertionError: x should equal to 5.</span><br></pre></td></tr></table></figure>
 <p>在这个例子中，程序在抛出一个<code>AssertionError</code>异常之后便终止了。那么如果还想再触发异常之后继续执行一些其他的指令呢？</p>
-<h1 id="The-try-and-exception-Block-Handling-Exceptions"><a href="#The-try-and-exception-Block-Handling-Exceptions" class="headerlink" title="The try and exception Block:Handling Exceptions"></a>The try and exception Block:Handling Exceptions</h1><p>在python中，<code>try</code>和<code>except</code>结构用来捕捉异常情况，并做一些对应的处理。<code>try</code>之后的语句，如果存在异常，则会执行<code>except</code>之后的语句。<img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except.jpg" alt></p>
+<h1 id="The-try-and-exception-Block-Handling-Exceptions"><a href="#The-try-and-exception-Block-Handling-Exceptions" class="headerlink" title="The try and exception Block:Handling Exceptions"></a>The try and exception Block:Handling Exceptions</h1><p>在python中，<code>try</code>和<code>except</code>结构用来捕捉异常情况，并做一些对应的处理。<code>try</code>之后的语句，如果存在异常，则会执行<code>except</code>之后的语句。<img src="/2019/03/06/python中的异常处理/try_except.jpg"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">value_check</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">assert</span> (x == <span class="number">5</span>), <span class="string">'x should equal to 5.'</span></span><br><span class="line">    x *= <span class="number">2</span></span><br><span class="line">    print(<span class="string">'Everything checks out.x = %d'</span> % x)</span><br></pre></td></tr></table></figure>
 <p>上面这个函数中有一个<code>assert</code>语句，当<code>x != 5</code>时，则会抛出一个<code>AssertionError</code>异常。而<code>try</code>加<code>except</code>结构则可以在出现异常时，并不终止程序，进行一些其他操作。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value_check(<span class="number">6</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'The value_check() function threw error.'</span>)</span><br></pre></td></tr></table></figure>
@@ -450,13 +468,13 @@
 <li>可以用<code>except</code>关键词检测多种类型的异常，并分别做不同的后续处理。</li>
 <li>直接用<code>except</code>关键词而不管具体是什么类型的异常是不推荐的。</li>
 </ul>
-<h1 id="The-else-Clause"><a href="#The-else-Clause" class="headerlink" title="The else Clause"></a>The else Clause</h1><p>还可以在<code>try</code>和<code>except</code>结构之后，再加<code>else</code>模块。<code>else</code>之后的内容在没有<code>try</code>代码块中没有异常抛出时，才会执行的。<img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else.jpg" alt>见如下例子：</p>
+<h1 id="The-else-Clause"><a href="#The-else-Clause" class="headerlink" title="The else Clause"></a>The else Clause</h1><p>还可以在<code>try</code>和<code>except</code>结构之后，再加<code>else</code>模块。<code>else</code>之后的内容在没有<code>try</code>代码块中没有异常抛出时，才会执行的。<img src="/2019/03/06/python中的异常处理/try_except_else.jpg">见如下例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value_check(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">except</span> AssertionError <span class="keyword">as</span> error:</span><br><span class="line">    print(error)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'Executing the else clause.'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Everything checks out.x = 10</span><br><span class="line">Executing the else clause.</span><br></pre></td></tr></table></figure>
 <p>在<code>else</code>中当然也可以写入<code>try</code>加<code>except</code>结构：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value_check(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">except</span> AssertionError <span class="keyword">as</span> error:</span><br><span class="line">    print(error)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'file.log'</span>) <span class="keyword">as</span> file:</span><br><span class="line">            read_data = file.read()</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError <span class="keyword">as</span> fnf_error:</span><br><span class="line">        print(fnf_error)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Everything checks out.x = 10</span><br><span class="line">[Errno 2] No such file or directory: &apos;file.log&apos;</span><br></pre></td></tr></table></figure>
-<h1 id="Cleaning-Up-After-Using-finally"><a href="#Cleaning-Up-After-Using-finally" class="headerlink" title="Cleaning Up After Using finally"></a>Cleaning Up After Using finally</h1><p>在之上所介绍的<code>try</code>加<code>except</code>加<code>else</code>结构中，<code>except</code>和<code>else</code>都是有条件执行的。可以再加一个<code>finally</code>模块，来无条件的执行一些语句。<img src="C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else_finally.jpg" alt>来看下面的例子：</p>
+<h1 id="Cleaning-Up-After-Using-finally"><a href="#Cleaning-Up-After-Using-finally" class="headerlink" title="Cleaning Up After Using finally"></a>Cleaning Up After Using finally</h1><p>在之上所介绍的<code>try</code>加<code>except</code>加<code>else</code>结构中，<code>except</code>和<code>else</code>都是有条件执行的。可以再加一个<code>finally</code>模块，来无条件的执行一些语句。<img src="/2019/03/06/python中的异常处理/try_except_else_finally.jpg">来看下面的例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    value_check(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">except</span> AssertionError <span class="keyword">as</span> error:</span><br><span class="line">    print(error)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'file.log'</span>) <span class="keyword">as</span> file:</span><br><span class="line">            read_data = file.read()</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError <span class="keyword">as</span> fnf_error:</span><br><span class="line">        print(fnf_error)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    print(<span class="string">'Cleaning up, irrespective of any exceptions.'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Everything checks out.x = 10</span><br><span class="line">[Errno 2] No such file or directory: &apos;file.log&apos;</span><br><span class="line">Cleaning up, irrespective of any exceptions.</span><br></pre></td></tr></table></figure>
 <p>不论<code>try</code>和<code>else</code>代码块中出现了什么异常，<code>finally</code>代码块都会被执行。</p>
@@ -469,7 +487,6 @@
 <li><code>else</code>代码块会在<code>try</code>中没有出现异常时被执行。</li>
 <li><code>finally</code>代码块不论之前结构中是否出现异常，都会被执行。</li>
 </ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://realpython.com/python-exceptions/" target="_blank" rel="noopener">https://realpython.com/python-exceptions/</a></p>
 
       
     </div>
@@ -597,7 +614,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -606,7 +623,7 @@
                     
                     <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">标签</span>
-                  
+                  </a>
                 </div>
               
             </nav>
@@ -671,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exceptions-versus-Syntax-Errors"><span class="nav-number">2.</span> <span class="nav-text">Exceptions versus Syntax Errors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raising-an-Exception"><span class="nav-number">3.</span> <span class="nav-text">Raising an Exception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-AssertionError-Exception"><span class="nav-number">4.</span> <span class="nav-text">The AssertionError Exception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-try-and-exception-Block-Handling-Exceptions"><span class="nav-number">5.</span> <span class="nav-text">The try and exception Block:Handling Exceptions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-else-Clause"><span class="nav-number">6.</span> <span class="nav-text">The else Clause</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cleaning-Up-After-Using-finally"><span class="nav-number">7.</span> <span class="nav-text">Cleaning Up After Using finally</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exceptions-versus-Syntax-Errors"><span class="nav-number">2.</span> <span class="nav-text">Exceptions versus Syntax Errors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Raising-an-Exception"><span class="nav-number">3.</span> <span class="nav-text">Raising an Exception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-AssertionError-Exception"><span class="nav-number">4.</span> <span class="nav-text">The AssertionError Exception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-try-and-exception-Block-Handling-Exceptions"><span class="nav-number">5.</span> <span class="nav-text">The try and exception Block:Handling Exceptions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-else-Clause"><span class="nav-number">6.</span> <span class="nav-text">The else Clause</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cleaning-Up-After-Using-finally"><span class="nav-number">7.</span> <span class="nav-text">Cleaning Up After Using finally</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
