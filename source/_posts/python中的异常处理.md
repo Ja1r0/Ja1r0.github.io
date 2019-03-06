@@ -8,10 +8,12 @@ tags: python语言特性
 
 <!-- more -->
 
+[参考链接](https://realpython.com/python-exceptions/)
+
 # 概述
 
 本文总结python中的异常处理，包含以下内容：
-![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/intro.jpg)
+{% asset_img intro.jpg %}
 
 - [Exceptions versus Syntax Errors]()
 - [Raising an Exception]()
@@ -69,7 +71,7 @@ ZeroDivisionError: division by zero
 
 # Raising an Exception
 
-用户可以使用`raise`关键字，当满足所设定的条件时，主动触发异常。![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/raise.jpg)
+用户可以使用`raise`关键字，当满足所设定的条件时，主动触发异常。{% asset_img raise.jpg %}
 `raise`的使用方式如下：
 
 ```python
@@ -97,7 +99,7 @@ Exception: x should not exceed 5.The value of x was: 10
 
 # The AssertionError Exception
 
-在python脚本的编写中，除了被动的等待程序报错，可以用`assert`关键字去主动的去探测一些错误，返回更多的与错误有关的信息。[这里](https://dbader.org/blog/python-assert-tutorial)是一篇介绍`assert`的博客。`assert`关键字后面会跟一个条件判断，当此条件为真时，程序继续正常执行；当条件为假时，则会抛出一个`AssertionError`。也就是说，`assert`语句是要保证脚本运行至此时，满足括号中的条件，如果不满足的话，则触发异常，终止程序。![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/assert.jpg)见如下例子：
+在python脚本的编写中，除了被动的等待程序报错，可以用`assert`关键字去主动的去探测一些错误，返回更多的与错误有关的信息。[这里](https://dbader.org/blog/python-assert-tutorial)是一篇介绍`assert`的博客。`assert`关键字后面会跟一个条件判断，当此条件为真时，程序继续正常执行；当条件为假时，则会抛出一个`AssertionError`。也就是说，`assert`语句是要保证脚本运行至此时，满足括号中的条件，如果不满足的话，则触发异常，终止程序。{% asset_img assert.jpg %}见如下例子：
 
 ```python
 x = 6
@@ -122,7 +124,7 @@ AssertionError: x should equal to 5.
 
 # The try and exception Block:Handling Exceptions
 
-在python中，`try`和`except`结构用来捕捉异常情况，并做一些对应的处理。`try`之后的语句，如果存在异常，则会执行`except`之后的语句。![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except.jpg)
+在python中，`try`和`except`结构用来捕捉异常情况，并做一些对应的处理。`try`之后的语句，如果存在异常，则会执行`except`之后的语句。{% asset_img try_except.jpg %}
 
 ```python
 def value_check(x):
@@ -240,7 +242,7 @@ Everything checks out.x = 10
 
 # The else Clause
 
-还可以在`try`和`except`结构之后，再加`else`模块。`else`之后的内容在没有`try`代码块中没有异常抛出时，才会执行的。![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else.jpg)见如下例子：
+还可以在`try`和`except`结构之后，再加`else`模块。`else`之后的内容在没有`try`代码块中没有异常抛出时，才会执行的。{% asset_img try_except_else.jpg %}见如下例子：
 
 ```python
 try:
@@ -278,7 +280,7 @@ Everything checks out.x = 10
 
 # Cleaning Up After Using finally
 
-在之上所介绍的`try`加`except`加`else`结构中，`except`和`else`都是有条件执行的。可以再加一个`finally`模块，来无条件的执行一些语句。![](C:/Users/Jairo/Blog/Ja1r0.github.io/source/_posts/try_except_else_finally.jpg)来看下面的例子：
+在之上所介绍的`try`加`except`加`else`结构中，`except`和`else`都是有条件执行的。可以再加一个`finally`模块，来无条件的执行一些语句。{% asset_img try_except_else_finally.jpg %}来看下面的例子：
 
 ```python
 try:
@@ -313,7 +315,3 @@ Cleaning up, irrespective of any exceptions.
 - `except`可以捕捉`try`中出现的特性类型的异常，并做相对应的处理。
 - `else`代码块会在`try`中没有出现异常时被执行。
 - `finally`代码块不论之前结构中是否出现异常，都会被执行。
-
-# 参考
-
-https://realpython.com/python-exceptions/
