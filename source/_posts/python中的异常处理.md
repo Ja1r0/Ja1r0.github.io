@@ -15,13 +15,13 @@ tags: python语言特性
 本文总结python中的异常处理，包含以下内容：
 {% asset_img intro.jpg %}
 
-- [Exceptions versus Syntax Errors]()
-- [Raising an Exception]()
-- [The AssertionError Exception]()
-- [The try and except Block:Handling Exception]()
-- [The else Clause]()
-- [Cleaning Up After Using finally]()
-- [Summing up]()
+- Exceptions versus Syntax Errors
+- Raising an Exception
+- The AssertionError Exception
+- The try and except Block:Handling Exception
+- The else Clause
+- Cleaning Up After Using finally
+- Summing up
 
 # Exceptions versus Syntax Errors
 
