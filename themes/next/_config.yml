@@ -207,11 +207,11 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: 彩蛋
+links_title: 
 links_layout: block
 #links_layout: inline
 links:
-  点我点我: https://jairo.top/heart.html?4p2k
+  #点我点我: https://jairo.top/heart.html?4p2k
 
 # Sidebar Avatar
 avatar:
