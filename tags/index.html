@@ -353,10 +353,14 @@
                   
                 
               
-              目前共计 5 个标签
+                
+                  
+                
+              
+              目前共计 6 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/python语言特性/" style="font-size: 12px; color: #ccc">python语言特性</a> <a href="/tags/人体姿态估计/" style="font-size: 12px; color: #ccc">人体姿态估计</a> <a href="/tags/技术备忘/" style="font-size: 12px; color: #ccc">技术备忘</a> <a href="/tags/生活感悟/" style="font-size: 30px; color: #111">生活感悟</a> <a href="/tags/论文阅读/" style="font-size: 12px; color: #ccc">论文阅读</a>
+              <a href="/tags/python语言特性/" style="font-size: 12px; color: #ccc">python语言特性</a> <a href="/tags/人体姿态估计/" style="font-size: 12px; color: #ccc">人体姿态估计</a> <a href="/tags/技术备忘/" style="font-size: 12px; color: #ccc">技术备忘</a> <a href="/tags/深度学习基础/" style="font-size: 12px; color: #ccc">深度学习基础</a> <a href="/tags/生活感悟/" style="font-size: 30px; color: #111">生活感悟</a> <a href="/tags/论文阅读/" style="font-size: 12px; color: #ccc">论文阅读</a>
             </div>
           </div>
         
@@ -414,7 +418,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -439,7 +443,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -637,6 +643,35 @@
 
   
   
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'FFBH4g9ChApMzbtDiqdQHynm-gzGzoHsz',
+    appKey: 'DVysqP1uX7QQxARHyUqa4WKn',
+    placeholder: '让我听到你的声音~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
 
 
 
