@@ -1910,7 +1910,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff6174;
+  background: #fa1bbe;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2890,14 +2890,17 @@ hr {
   color: #000;
 }
 .post {
+  background: #fbfbfb;
   margin-top: 60px;
   margin-bottom: 60px;
   padding: 25px;
   -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
   -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+  opacity: 0.8;
+  border-radius: 10px;
 }
 body {
-  background-image: url("/images/background.jpg");
+  background: url("/images/background.jpg");
   background-position: 10% 10%; /*Positioning*/
   background-attachment: fixed;
   background-repeat: no-repeat; /*Prevent showing multiple background images*/
