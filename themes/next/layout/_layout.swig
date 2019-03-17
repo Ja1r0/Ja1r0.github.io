@@ -119,6 +119,7 @@
   {% include '_third-party/exturl.swig' %}
   {% include '_third-party/bookmark.swig' %}
   {% include '_third-party/copy-code.swig' %}
+  {{ live2d() }}
 </body>
 </html>
 <!-- 页面点击小红心 -->
