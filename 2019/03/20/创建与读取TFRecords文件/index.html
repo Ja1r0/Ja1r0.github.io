@@ -105,7 +105,7 @@
 <meta property="og:description" content="参考链接.用TensorFlow，将本地图片文件，制作为TFRecords文件的数据集，并读取。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/03/20/创建与读取TFRecords文件/1.jpg">
-<meta property="og:updated_time" content="2019-03-21T07:33:05.825Z">
+<meta property="og:updated_time" content="2019-03-21T09:29:26.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建与读取TFRecords文件">
 <meta name="twitter:description" content="参考链接.用TensorFlow，将本地图片文件，制作为TFRecords文件的数据集，并读取。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-21 15:33:05" itemprop="dateModified" datetime="2019-03-21T15:33:05+08:00">2019-03-21</time>
+                <time title="修改时间：2019-03-21 17:29:26" itemprop="dateModified" datetime="2019-03-21T17:29:26+08:00">2019-03-21</time>
               
             
           </span>
@@ -424,7 +424,13 @@
       
         <p><a href="https://my.oschina.net/u/3800567/blog/1637798" target="_blank" rel="noopener">参考链接</a>.用TensorFlow，将本地图片文件，制作为TFRecords文件的数据集，并读取。</p>
 <a id="more"></a>
-<h1 id="遍历目录及文件的函数"><a href="#遍历目录及文件的函数" class="headerlink" title="遍历目录及文件的函数"></a>遍历目录及文件的函数</h1><p>在TensorFlow中有函数<code>tf.gfile.Walk()</code>函数可以用来遍历目录下的子目录以及文件。在此记录一下该函数的遍历次序问题，因为涉及到每次制作数据集时，数据集中图片样本的次序是否保持不变。发现该函数和<code>os.walk()</code>函数的遍历方式是一样的，且每次遍历结果都相同。</p>
+<h1 id="遍历目录及文件"><a href="#遍历目录及文件" class="headerlink" title="遍历目录及文件"></a>遍历目录及文件</h1><p>这个步骤，主要是把所有图片的路径读入三个列表中：<code>training_images</code>、<code>testing_images</code>、<code>validation_images</code>.对应三个集合：训练集、测试集、验证集。流程如下：</p>
+<ol>
+<li>确定所有子目录（<code>tf.gfile.Walk()</code>）</li>
+<li>找出所有图片文件（<code>tf.gfile.Glob()</code>）</li>
+<li>对每一个图片文件判断进入哪一个集合</li>
+</ol>
+<h2 id="确定所有子目录"><a href="#确定所有子目录" class="headerlink" title="确定所有子目录"></a>确定所有子目录</h2><p>在TensorFlow中有函数<code>tf.gfile.Walk()</code>函数可以用来遍历目录下的子目录以及文件。在此记录一下该函数的遍历次序问题，即每次遍历输出的结果是否一致。发现该函数和<code>os.walk()</code>函数的遍历方式是一样的，且每次遍历结果都相同。</p>
 <p>每次调用遍历一个目录，返回的结果为一个三元组<code>(root, dirs, files)</code>：</p>
 <ul>
 <li><code>root</code>：当前所遍历的目录</li>
@@ -439,6 +445,20 @@
 <p>当对应参数置为<code>False</code>时，将会按照先子目录，后根目录的顺序遍历。如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; [x for x in os.walk('pycode', topdown=False)]</span><br><span class="line">[('pycode\\tmp', [], ['new 1.py']), ('pycode\\tutorial', [], ['fabs.py', 'revers</span><br><span class="line">e_string.py', 'run.py']), ('pycode', ['tmp', 'tutorial'], ['algo.py', 'log.txt',</span><br><span class="line"> 'paper.py', 'StringContain.py', 'tf_test.py'])]</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; [x for x in tf.gfile.Walk('pycode', in_order=False)]</span><br><span class="line">[('pycode\\tmp', [], ['new 1.py']), ('pycode\\tutorial', [], ['fabs.py', 'revers</span><br><span class="line">e_string.py', 'run.py']), ('pycode', ['tmp', 'tutorial'], ['algo.py', 'log.txt',</span><br><span class="line"> 'paper.py', 'StringContain.py', 'tf_test.py'])]</span><br></pre></td></tr></table></figure>
+<h2 id="找出所有图片文件"><a href="#找出所有图片文件" class="headerlink" title="找出所有图片文件"></a>找出所有图片文件</h2><p>上一步所找出的所有子目录，即为类别目录，类别目录下即为该类别的所有图片样本。通过一个文件类型匹配，可以避免目录中出现非图片文件而导致的异常。例如要求所有图片类型为<code>.jpg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">file_glob = <span class="string">'./images/A/*.jpg'</span></span><br><span class="line">image_list = tf.gfile.Glob(file_glob)</span><br></pre></td></tr></table></figure>
+<p>这一匹配函数<code>tf.gfile.Glob()</code>，给出的文件名称次序是固定的，每次调用都不变。这一顺序和<code>os.listdir()</code>给出的次序是一样的。对于类似<code>A001.jpg, A002.jpg, ...</code>这种命名方式，其次序并不按照数字的大小。如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; file_glob = '*.png'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; tf.gfile.Glob(file_glob)</span><br><span class="line">['./A3.png', './A11.png', './A10.png', './A8.png', './A6.png', './A9.png', './A12.png', './A5.png', './A16.png', './A7.png', './A15.png', './A2.png', './A1.png', './A13.png', './A14.png', './A4.png', './A0.png']</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; os.listdir('.')</span><br><span class="line">['A3.png', 'A11.png', 'A10.png', 'A8.png', 'A6.png', 'A9.png', 'A12.png', 'A5.png', 'A16.png', 'A7.png', 'A15.png', 'A2.png', 'A1.png', 'A13.png', 'A14.png', 'A4.png', 'A0.png']</span><br></pre></td></tr></table></figure>
+<p>这一排序方式可能是由文件系统（file system）决定的。</p>
+<h2 id="将图片装入不同的集合"><a href="#将图片装入不同的集合" class="headerlink" title="将图片装入不同的集合"></a>将图片装入不同的集合</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analysis_image_lists</span><span class="params">(image_lists)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    Input: </span></span><br><span class="line"><span class="string">    - image_lists</span></span><br><span class="line"><span class="string">    e.g.</span></span><br><span class="line"><span class="string">    image_lists['A'] = &#123;</span></span><br><span class="line"><span class="string">            'training': ['./images/A/A001.jpg', ...],</span></span><br><span class="line"><span class="string">            'testing': ['./images/A/A002.jpg', ...],</span></span><br><span class="line"><span class="string">            'validation': ['./images/A/A005.jpg', ...],</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Output: </span></span><br><span class="line"><span class="string">    - train_list</span></span><br><span class="line"><span class="string">    - test_list</span></span><br><span class="line"><span class="string">    - validation_list  </span></span><br><span class="line"><span class="string">    e.g. ['./images/A/A002.jpg', ...], ..., ...</span></span><br><span class="line"><span class="string">    '''</span>  </span><br><span class="line">    </span><br><span class="line">    train_list = []</span><br><span class="line">    test_list = []</span><br><span class="line">    validation_list = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> _, lists_dict <span class="keyword">in</span> image_lists.items():</span><br><span class="line">        </span><br><span class="line">        train_list.extend(lists_dict[<span class="string">'training'</span>])</span><br><span class="line">        test_list.extend(lists_dict[<span class="string">'testing'</span>])</span><br><span class="line">        validation_list.extend(lists_dict[<span class="string">'validation'</span>])</span><br><span class="line">    </span><br><span class="line">    random.shuffle(train_list)</span><br><span class="line">    random.shuffle(test_list)</span><br><span class="line">    random.shuffle(validation_list)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> train_list, test_list, validation_list</span><br></pre></td></tr></table></figure>
+<p>这里是访问一个字典里的键值，我们知道python中的字典，内部是无序的。但是其实每次访问其中元素时，还是依照了一定的顺序，只不过不见得是放入时的顺序。这种访问次序，是由一个哈希算法决定的，这种哈希算法随着python版本的改变，以及操作平台的改变都会不同。</p>
+<blockquote>
+<p>Python dictionaries and sets are stored using some efficient hashing algorithm. The precise algorithm is an implementation detail (and may differ from one version of Python to another as well as one platform to another (CPython, vs. PyPy, vs Jython or IronPython, and so on).</p>
+<p>Iterating over the keys returns them in whatever order the underlying implementation chose to store them. Hashing provides for extremely efficient access to an item given its key. This typically has the effect of making them appear to be in a “random” order by human standards.</p>
+<p><a href="https://www.quora.com/In-Python-what-decides-the-order-that-a-loop-on-a-dictionary-works-through-the-keys" target="_blank" rel="noopener">参考链接</a>.</p>
+</blockquote>
+<p>所以至此来说，制作成的<code>TFRecords</code>文件中样本的顺序，在每次制作时就应该认为是不固定的了。那么看来就没必要保持每次制作数据集时样本的次序一致。在上面的函数中，干脆加入了<code>random.shuffle()</code>，来让它乱的彻底一点。</p>
 
       
     </div>
@@ -660,7 +680,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遍历目录及文件的函数"><span class="nav-number">1.</span> <span class="nav-text">遍历目录及文件的函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#遍历目录及文件"><span class="nav-number">1.</span> <span class="nav-text">遍历目录及文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#确定所有子目录"><span class="nav-number">1.1.</span> <span class="nav-text">确定所有子目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找出所有图片文件"><span class="nav-number">1.2.</span> <span class="nav-text">找出所有图片文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将图片装入不同的集合"><span class="nav-number">1.3.</span> <span class="nav-text">将图片装入不同的集合</span></a></li></ol></li></ol></div>
             
 
           </div>
