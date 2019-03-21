@@ -20,7 +20,7 @@ tags: TensorFlow
 
 如下面这个文件树：
 
-{% assert_img 1.jpg %}
+{% assert_img 1.jpg 500 300%}
 
 默认会按照先根目录，后子目录的顺序遍历。如下：
 
