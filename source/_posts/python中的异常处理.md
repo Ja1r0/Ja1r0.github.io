@@ -1,7 +1,7 @@
 ---
 title: python中的异常处理
 date: 2019-03-06 20:09:14
-tags: python语言特性
+tags: Python
 ---
 
 主要包含`raise`,`assert`和`try...except`结构。
