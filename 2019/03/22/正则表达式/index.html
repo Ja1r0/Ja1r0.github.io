@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-cat.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-cat.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-cat.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="主要是正则表达式的基本操作举例，以及在python中使用re模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式">
+<meta property="og:url" content="http://yoursite.com/2019/03/22/正则表达式/index.html">
+<meta property="og:site_name" content="Jairo">
+<meta property="og:description" content="主要是正则表达式的基本操作举例，以及在python中使用re模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-22T15:03:23.883Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式">
+<meta name="twitter:description" content="主要是正则表达式的基本操作举例，以及在python中使用re模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/22/正则表达式/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>正则表达式 | Jairo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jairo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/正则表达式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jairo">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar_square.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jairo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正则表达式
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 11:13:05 / 修改时间：23:03:23" itemprop="dateCreated datePublished" datetime="2019-03-22T11:13:05+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/03/22/正则表达式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/22/正则表达式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要是正则表达式的基本操作举例，以及在python中使用<code>re</code>模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。</p>
+<a id="more"></a>
+<p>正则表达式可用来做字符串的匹配。在python中有<code>re</code>模块支持正则表达式的使用。由于在正则表达式中，有一些符号是有特殊含义的，使用python中的原始字符（raw string）可以避免产生误解，格式为：<code>r&#39;hello!&#39;</code>.</p>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><p><a href="https://support.google.com/analytics/answer/1034330?hl=zh-Hans" target="_blank" rel="noopener">参考链接</a></p>
+<h2 id="问号（？）"><a href="#问号（？）" class="headerlink" title="问号（？）"></a>问号（？）</h2><p>问号 (?) 匹配前面的字符 0 次或 1 次。例如10? 可以匹配：1、10。</p>
+<blockquote>
+<p>匹配最后一段为一位或两位数字的 IP 地址。</p>
+<p>例如，216.239.32.\d\d? 可以匹配：</p>
+<ul>
+<li>216.239.32.2</li>
+<li>216.239.32.34</li>
+</ul>
+<p>上例中使用<a href="https://support.google.com/analytics/answer/1034332" target="_blank" rel="noopener">反斜杠</a>对小数点转义，使用 \d 匹配任意位数字。</p>
+</blockquote>
+<h2 id="加号（-）"><a href="#加号（-）" class="headerlink" title="加号（+）"></a>加号（+）</h2><p>加号 (+) 匹配前面的字符 1 次或多次。例如10+ 可以匹配10、100、1000、等等。</p>
+<blockquote>
+<p>匹配最后一段为一位或多位数字的 IP 地址。</p>
+<p>例如，216.239.32.\d+ 可以匹配：</p>
+<ul>
+<li>216.239.32.2</li>
+<li>216.239.32.34</li>
+<li>216.239.32.567</li>
+</ul>
+<p>上例中使用<a href="https://support.google.com/analytics/answer/1034332" target="_blank" rel="noopener">反斜杠</a>对小数点转义，使用 \d 匹配任意位数字。</p>
+</blockquote>
+<h2 id="星号（-）"><a href="#星号（-）" class="headerlink" title="星号（*）"></a>星号（*）</h2><p>星号 (*) 匹配前面的字符 0 次或多次。例如10* 可以匹配：1、10、100、1000、等等。</p>
+<blockquote>
+<p>匹配最后一段为一位或多位数字的 IP 地址。</p>
+<p>例如，216.239.32.\d* 可以匹配：</p>
+<ul>
+<li>216.239.32.2</li>
+<li>216.239.32.34</li>
+<li>216.239.32.567</li>
+</ul>
+<p>上例中使用<a href="https://support.google.com/analytics/answer/1034332" target="_blank" rel="noopener">反斜杠</a>对小数点转义，使用 \d 匹配任意位数字。</p>
+<p>如果您想匹配的不仅仅是前面的项，则可以一起使用星号与<a href="https://support.google.com/analytics/answer/1034332" target="_blank" rel="noopener">点 (.*)</a>。点可以匹配前面的任何项，而星号将匹配该项 0 次或多次，这样您就可以匹配以相同字符开始和结束的所有 URL 了，无论开头和结尾字符之间夹着多少字符，您也可以匹配与这类似的内容。例如，/mens/.*html 可以匹配：</p>
+<ul>
+<li>/mens/shirts/oxford.html</li>
+<li>/mens/shirts/oxford/shortsleeve.html</li>
+</ul>
+</blockquote>
+<h1 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h1><p>正则表达式中的分组，是通过圆括号<code>( )</code>完成的。利用圆括号分组后，还可以再利用重复限制符，如<code>*</code>、<code>+</code>、<code>?</code>、<code>{m,n}</code>，来重复组里的内容。例如<code>(ab)*</code>将匹配0或多个重复的”ab”。</p>
+<ul>
+<li>先来看不分组的情况</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; import re</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; p=re.compile('\d-\d-\d')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m=p.match('2-3-1')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.groups()</span><br><span class="line">()</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.group()</span><br><span class="line">'2-3-1'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.group(1)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</span><br><span class="line">IndexError: no such group</span><br></pre></td></tr></table></figure>
+<ul>
+<li>下面在表达式中分出三个组</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; p=re.compile('(\d)-(\d)-(\d)')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m=p.match('1-2-3')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.groups()</span><br><span class="line">('1', '2', '3')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.group()</span><br><span class="line">'1-2-3'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.group(1)</span><br><span class="line">'1'</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; m.group(0,2,1)</span><br><span class="line">('2-3-1', '2', '1')</span><br></pre></td></tr></table></figure>
+<h1 id="匹配和查找"><a href="#匹配和查找" class="headerlink" title="匹配和查找"></a>匹配和查找</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.match(pattern, string, flags=<span class="number">0</span>)</span><br><span class="line">re.search(pattern, string, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>在上面的两个函数中，<code>pattern</code>可以由<code>compile</code>函数获得。该函数根据包含的正则表达式的字符串创建<strong>模式对象</strong>。可以实现更有效率的匹配。就像上一小节展示的那样。</p>
+<hr>
+<p>以下为正则表达式的符号说明和应用举例。<a href="https://www.tutorialspoint.com/python/python_reg_expressions.htm" target="_blank" rel="noopener">参考链接</a>.</p>
+<h2 id="Regular-Expression-Modifiers"><a href="#Regular-Expression-Modifiers" class="headerlink" title="Regular Expression Modifiers"></a>Regular Expression Modifiers</h2><p>以下表达式可以作为查找匹配函数中的参数，满足自己的相应需求。当需要添加多个时，用竖线$|$隔开。</p>
+<table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Modifier &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>re.I</strong><br>Performs case-insensitive matching.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>re.L</strong><br>Interprets words according to the current locale. This interpretation affects the alphabetic group (\w and \W), as well as word boundary behavior(\b and \B).</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>re.M</strong><br>Makes $ match the end of a line (not just the end of the string) and makes ^ match the start of any line (not just the start of the string).</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>re.S</strong><br>Makes a period (dot) match any character, including a newline.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>re.U</strong><br>Interprets letters according to the Unicode character set. This flag affects the behavior of \w, \W, \b, \B.</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>re.X</strong><br>Permits “cuter” regular expression syntax. It ignores whitespace (except inside a set [] or when escaped by a backslash) and treats unescaped # as a comment marker.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Regular-Expression-Patterns"><a href="#Regular-Expression-Patterns" class="headerlink" title="Regular Expression Patterns"></a>Regular Expression Patterns</h2><p>以下字符，在正则表达式中是有特殊作用的，称为<code>control characters</code>：</p>
+<p><code>+</code>    <code>?</code>    <code>.</code>    <code>*</code>    <code>^</code>    <code>$</code>    <code>(</code>    <code>)</code>    <code>[</code>    <code>]</code>    <code>{</code>    <code>}</code>    <code>|</code>    <code>\</code></p>
+<p>除了上面这些控制字符，其他出现在正则表达式中的字符，在匹配时都会匹配到自身。而上面这些控制字符，可以组合出一些简洁的表达式，从而不需要全部写出想要匹配的字符。当我们不想使用控制字符的特殊含义时，需要在字符前面加反斜杠<code>\</code>。以下为控制字符的使用方法：</p>
+<p>注：下表中的<code>re</code>表示一段正则表达式。</p>
+<table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Pattern &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>^</strong><br>Matches beginning of line.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>$</strong><br>Matches end of line.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>.</strong><br>Matches any single character except newline. Using m option allows it to match newline as well.</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>[…]</strong><br>Matches any single character in brackets.</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>[^…]</strong><br>Matches any single character not in brackets</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>re*</strong><br>Matches 0 or more occurrences of preceding expression.</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>re+</strong><br>Matches 1 or more occurrence of preceding expression.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>re?</strong><br>Matches 0 or 1 occurrence of preceding expression.</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>re{ n}</strong><br>Matches exactly n number of occurrences of preceding expression.</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>re{ n,}</strong><br>Matches n or more occurrences of preceding expression.</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>re{ n, m}</strong><br>Matches at least n and at most m occurrences of preceding expression.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>**a\</td>
+<td>b**<br>Matches either a or b.</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>(re)</strong><br>Groups regular expressions and remembers matched text.</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>(?imx)</strong><br>Temporarily toggles on i, m, or x options within a regular expression. If in parentheses, only that area is affected.</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>(?-imx)</strong><br>Temporarily toggles off i, m, or x options within a regular expression. If in parentheses, only that area is affected.</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>(?: re)</strong><br>Groups regular expressions without remembering matched text.</td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>(?imx: re)</strong><br>Temporarily toggles on i, m, or x options within parentheses.</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>(?-imx: re)</strong><br>Temporarily toggles off i, m, or x options within parentheses.</td>
+</tr>
+<tr>
+<td>19</td>
+<td><strong>(?#…)</strong><br>Comment.</td>
+</tr>
+<tr>
+<td>20</td>
+<td><strong>(?= re)</strong><br>Specifies position using a pattern. Doesn’t have a range.</td>
+</tr>
+<tr>
+<td>21</td>
+<td><strong>(?! re)</strong><br>Specifies position using pattern negation. Doesn’t have a range.</td>
+</tr>
+<tr>
+<td>22</td>
+<td><strong>(?&gt; re)</strong><br>Matches independent pattern without backtracking.</td>
+</tr>
+<tr>
+<td>23</td>
+<td><strong>\w</strong><br>Matches word characters.</td>
+</tr>
+<tr>
+<td>24</td>
+<td><strong>\W</strong><br>Matches nonword characters.</td>
+</tr>
+<tr>
+<td>25</td>
+<td><strong>\s</strong><br>Matches whitespace. Equivalent to [\t\n\r\f].</td>
+</tr>
+<tr>
+<td>26</td>
+<td><strong>\S</strong><br>Matches nonwhitespace.</td>
+</tr>
+<tr>
+<td>27</td>
+<td><strong>\d</strong><br>Matches digits. Equivalent to [0-9].</td>
+</tr>
+<tr>
+<td>28</td>
+<td><strong>\D</strong><br>Matches nondigits.</td>
+</tr>
+<tr>
+<td>29</td>
+<td><strong>\A</strong><br>Matches beginning of string.</td>
+</tr>
+<tr>
+<td>30</td>
+<td><strong>\Z</strong><br>Matches end of string. If a newline exists, it matches just before newline.</td>
+</tr>
+<tr>
+<td>31</td>
+<td><strong>\z</strong><br>Matches end of string.</td>
+</tr>
+<tr>
+<td>32</td>
+<td><strong>\G</strong><br>Matches point where last match finished.</td>
+</tr>
+<tr>
+<td>33</td>
+<td><strong>\b</strong><br>Matches word boundaries when outside brackets. Matches backspace (0x08) when inside brackets.</td>
+</tr>
+<tr>
+<td>34</td>
+<td><strong>\B</strong><br>Matches nonword boundaries.</td>
+</tr>
+<tr>
+<td>35</td>
+<td><strong>\n, \t, etc.</strong><br>Matches newlines, carriage returns, tabs, etc.</td>
+</tr>
+<tr>
+<td>36</td>
+<td><strong>\1…\9</strong><br>Matches nth grouped subexpression.</td>
+</tr>
+<tr>
+<td>37</td>
+<td><strong>\10</strong><br>Matches nth grouped subexpression if it matched already. Otherwise refers to the octal representation of a character code.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="正则表达式举例"><a href="#正则表达式举例" class="headerlink" title="正则表达式举例"></a>正则表达式举例</h2><h3 id="Literal-characters"><a href="#Literal-characters" class="headerlink" title="Literal characters"></a>Literal characters</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>python</strong><br>Match “python”.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Character-classes"><a href="#Character-classes" class="headerlink" title="Character classes"></a>Character classes</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>[Pp]ython</strong><br>Match “Python” or “python”</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>rub[ye]</strong><br>Match “ruby” or “rube”</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>[aeiou]</strong><br>Match any one lowercase vowel</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>[0-9]</strong><br>Match any digit; same as [0123456789]</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>[a-z]</strong><br>Match any lowercase ASCII letter</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>[A-Z]</strong><br>Match any uppercase ASCII letter</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>[a-zA-Z0-9]</strong><br>Match any of the above</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>[^aeiou]</strong><br>Match anything other than a lowercase vowel</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>[^0-9]</strong><br>Match anything other than a digit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Special-Character-Classes"><a href="#Special-Character-Classes" class="headerlink" title="Special Character Classes"></a>Special Character Classes</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>.</strong><br>Match any character except newline</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>\d</strong><br>Match a digit: [0-9]</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>\D</strong><br>Match a nondigit: [^0-9]</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>\s</strong><br>Match a whitespace character: [ \t\r\n\f]</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>\S</strong><br>Match nonwhitespace: [^ \t\r\n\f]</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>\w</strong><br>Match a single word character: [A-Za-z0-9_]</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>\W</strong><br>Match a nonword character: [^A-Za-z0-9_]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Repetition-Cases"><a href="#Repetition-Cases" class="headerlink" title="Repetition Cases"></a>Repetition Cases</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>ruby?</strong><br>Match “rub” or “ruby”: the y is optional</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>ruby*</strong><br>Match “rub” plus 0 or more ys</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>ruby+</strong><br>Match “rub” plus 1 or more ys</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>\d{3}</strong><br>Match exactly 3 digits</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>\d{3,}</strong><br>Match 3 or more digits</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>\d{3,5}</strong><br>Match 3, 4, or 5 digits</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Nongreedy-repetition"><a href="#Nongreedy-repetition" class="headerlink" title="Nongreedy repetition"></a>Nongreedy repetition</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>&lt;.*&gt;</strong><br>Greedy repetition: matches “\<python>perl&gt;”</python></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>&lt;.*?&gt;</strong><br>Nongreedy: matches “\<python>“ in “\<python>perl&gt;”</python></python></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Grouping-with-Parentheses"><a href="#Grouping-with-Parentheses" class="headerlink" title="Grouping with Parentheses"></a>Grouping with Parentheses</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>\D\d+</strong><br>No group: + repeats \d</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>(\D\d)+</strong><br>Grouped: + repeats \D\d pair</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>([Pp]ython(, )?)+</strong><br>Match “Python”, “Python, python, python”, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Backreferences"><a href="#Backreferences" class="headerlink" title="Backreferences"></a>Backreferences</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>([Pp])ython&amp;\1ails</strong><br>Match python&amp;pails or Python&amp;Pails</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>([‘“])[^\1]*\1</strong><br>Single or double-quoted string. \1 matches whatever the 1st group matched. \2 matches whatever the 2nd group matched, etc.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h3><p>用竖线<code>|</code>实现字符匹配中的<code>或</code>关系。</p>
+<table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>**python\</td>
+<td>perl**<br>Match “python” or “perl”</td>
+</tr>
+<tr>
+<td>2</td>
+<td>**rub(y\</td>
+<td>le))**<br>Match “ruby” or “ruble”</td>
+</tr>
+<tr>
+<td>3</td>
+<td>**Python(!+\</td>
+<td>\?)**<br>“Python” followed by one or more ! or one ?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h3><p>以下例子约束了字符所在的位置。</p>
+<table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>^Python</strong><br>Match “Python” at the start of a string or internal line</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Python$</strong><br>Match “Python” at the end of a string or line</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>\APython</strong><br>Match “Python” at the start of a string</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Python\Z</strong><br>Match “Python” at the end of a string</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>\bPython\b</strong><br>Match “Python” at a word boundary</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>\brub\B</strong><br>\B is nonword boundary: match “rub” in “rube” and “ruby” but not alone</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Python(?=!)</strong><br>Match “Python”, if followed by an exclamation point.</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Python(?!!)</strong><br>Match “Python”, if not followed by an exclamation point.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Special-Syntax-with-Parentheses"><a href="#Special-Syntax-with-Parentheses" class="headerlink" title="Special Syntax with Parentheses"></a>Special Syntax with Parentheses</h3><table>
+<thead>
+<tr>
+<th>Sr.No.</th>
+<th>Example &amp; Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>R(?#comment)</strong><br>Matches “R”. All the rest is a comment</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>R(?i)uby</strong><br>Case-insensitive while matching “uby”</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>R(?i:uby)</strong><br>Same as above</td>
+</tr>
+<tr>
+<td>4</td>
+<td>**rub(?:y\</td>
+<td>le))**<br>Group only without creating \1 backreference</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/博客搭建前的困惑答疑/" rel="next" title="博客搭建前的困惑答疑">
+                <i class="fa fa-chevron-left"></i> 博客搭建前的困惑答疑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar_square.png" alt="Jairo">
+            
+              <p class="site-author-name" itemprop="name">Jairo</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                  <a href="https://www.zhihu.com/people/Ja1r0/activities" title="知乎 &rarr; https://www.zhihu.com/people/Ja1r0/activities" rel="noopener" target="_blank">知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                  <a href="https://weibo.com/u/5601451342" title="微博 &rarr; https://weibo.com/u/5601451342" rel="noopener" target="_blank">微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                  <a href="mailto:jairoyang@qq.com" title="邮件 &rarr; mailto:jairoyang@qq.com" rel="noopener" target="_blank">邮件</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问号（？）"><span class="nav-number">1.1.</span> <span class="nav-text">问号（？）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加号（-）"><span class="nav-number">1.2.</span> <span class="nav-text">加号（+）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星号（-）"><span class="nav-number">1.3.</span> <span class="nav-text">星号（*）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组"><span class="nav-number">2.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匹配和查找"><span class="nav-number">3.</span> <span class="nav-text">匹配和查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Regular-Expression-Modifiers"><span class="nav-number">3.1.</span> <span class="nav-text">Regular Expression Modifiers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regular-Expression-Patterns"><span class="nav-number">3.2.</span> <span class="nav-text">Regular Expression Patterns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式举例"><span class="nav-number">3.3.</span> <span class="nav-text">正则表达式举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Literal-characters"><span class="nav-number">3.3.1.</span> <span class="nav-text">Literal characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Character-classes"><span class="nav-number">3.3.2.</span> <span class="nav-text">Character classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-Character-Classes"><span class="nav-number">3.3.3.</span> <span class="nav-text">Special Character Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repetition-Cases"><span class="nav-number">3.3.4.</span> <span class="nav-text">Repetition Cases</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nongreedy-repetition"><span class="nav-number">3.3.5.</span> <span class="nav-text">Nongreedy repetition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grouping-with-Parentheses"><span class="nav-number">3.3.6.</span> <span class="nav-text">Grouping with Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backreferences"><span class="nav-number">3.3.7.</span> <span class="nav-text">Backreferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alternatives"><span class="nav-number">3.3.8.</span> <span class="nav-text">Alternatives</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anchors"><span class="nav-number">3.3.9.</span> <span class="nav-text">Anchors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-Syntax-with-Parentheses"><span class="nav-number">3.3.10.</span> <span class="nav-text">Special Syntax with Parentheses</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jairo</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.0.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '9IIUquKAB8dC33rTPetpM2J0-gzGzoHsz',
+    appKey: '2VD0aGQxj9ligzFy97AIn5h9',
+    placeholder: '让我听到你的声音~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:1;
+    left: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -50px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
