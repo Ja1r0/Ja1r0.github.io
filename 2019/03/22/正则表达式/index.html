@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Jairo">
 <meta property="og:description" content="主要是正则表达式的基本操作举例，以及在python中使用re模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-22T15:03:23.883Z">
+<meta property="og:updated_time" content="2019-03-24T04:22:21.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="主要是正则表达式的基本操作举例，以及在python中使用re模块实现正则表达式的两个重要应用：匹配、查找。后面则列出了正则表达式的各种符号说明。">
@@ -349,12 +349,24 @@
                 
               
 
-              <time title="创建时间：2019-03-22 11:13:05 / 修改时间：23:03:23" itemprop="dateCreated datePublished" datetime="2019-03-22T11:13:05+08:00">2019-03-22</time>
+              <time title="创建时间：2019-03-22 11:13:05" itemprop="dateCreated datePublished" datetime="2019-03-22T11:13:05+08:00">2019-03-22</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-24 12:22:21" itemprop="dateModified" datetime="2019-03-24T12:22:21+08:00">2019-03-24</time>
               
             
           </span>
@@ -462,7 +474,7 @@
 <p>在上面的两个函数中，<code>pattern</code>可以由<code>compile</code>函数获得。该函数根据包含的正则表达式的字符串创建<strong>模式对象</strong>。可以实现更有效率的匹配。就像上一小节展示的那样。</p>
 <hr>
 <p>以下为正则表达式的符号说明和应用举例。<a href="https://www.tutorialspoint.com/python/python_reg_expressions.htm" target="_blank" rel="noopener">参考链接</a>.</p>
-<h2 id="Regular-Expression-Modifiers"><a href="#Regular-Expression-Modifiers" class="headerlink" title="Regular Expression Modifiers"></a>Regular Expression Modifiers</h2><p>以下表达式可以作为查找匹配函数中的参数，满足自己的相应需求。当需要添加多个时，用竖线$|$隔开。</p>
+<h1 id="Regular-Expression-Modifiers"><a href="#Regular-Expression-Modifiers" class="headerlink" title="Regular Expression Modifiers"></a>Regular Expression Modifiers</h1><p>以下表达式可以作为查找匹配函数中的参数，满足自己的相应需求。当需要添加多个时，用竖线$|$隔开。</p>
 <table>
 <thead>
 <tr>
@@ -497,7 +509,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="Regular-Expression-Patterns"><a href="#Regular-Expression-Patterns" class="headerlink" title="Regular Expression Patterns"></a>Regular Expression Patterns</h2><p>以下字符，在正则表达式中是有特殊作用的，称为<code>control characters</code>：</p>
+<h1 id="Regular-Expression-Patterns"><a href="#Regular-Expression-Patterns" class="headerlink" title="Regular Expression Patterns"></a>Regular Expression Patterns</h1><p>以下字符，在正则表达式中是有特殊作用的，称为<code>control characters</code>：</p>
 <p><code>+</code>    <code>?</code>    <code>.</code>    <code>*</code>    <code>^</code>    <code>$</code>    <code>(</code>    <code>)</code>    <code>[</code>    <code>]</code>    <code>{</code>    <code>}</code>    <code>|</code>    <code>\</code></p>
 <p>除了上面这些控制字符，其他出现在正则表达式中的字符，在匹配时都会匹配到自身。而上面这些控制字符，可以组合出一些简洁的表达式，从而不需要全部写出想要匹配的字符。当我们不想使用控制字符的特殊含义时，需要在字符前面加反斜杠<code>\</code>。以下为控制字符的使用方法：</p>
 <p>注：下表中的<code>re</code>表示一段正则表达式。</p>
@@ -555,8 +567,7 @@
 </tr>
 <tr>
 <td>12</td>
-<td>**a\</td>
-<td>b**<br>Matches either a or b.</td>
+<td><strong>a&#124;b</strong><br>Matches either a or b.</td>
 </tr>
 <tr>
 <td>13</td>
@@ -660,7 +671,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="正则表达式举例"><a href="#正则表达式举例" class="headerlink" title="正则表达式举例"></a>正则表达式举例</h2><h3 id="Literal-characters"><a href="#Literal-characters" class="headerlink" title="Literal characters"></a>Literal characters</h3><table>
+<h1 id="正则表达式举例"><a href="#正则表达式举例" class="headerlink" title="正则表达式举例"></a>正则表达式举例</h1><h2 id="Literal-characters"><a href="#Literal-characters" class="headerlink" title="Literal characters"></a>Literal characters</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -674,7 +685,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Character-classes"><a href="#Character-classes" class="headerlink" title="Character classes"></a>Character classes</h3><table>
+<h2 id="Character-classes"><a href="#Character-classes" class="headerlink" title="Character classes"></a>Character classes</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -720,7 +731,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Special-Character-Classes"><a href="#Special-Character-Classes" class="headerlink" title="Special Character Classes"></a>Special Character Classes</h3><table>
+<h2 id="Special-Character-Classes"><a href="#Special-Character-Classes" class="headerlink" title="Special Character Classes"></a>Special Character Classes</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -758,7 +769,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Repetition-Cases"><a href="#Repetition-Cases" class="headerlink" title="Repetition Cases"></a>Repetition Cases</h3><table>
+<h2 id="Repetition-Cases"><a href="#Repetition-Cases" class="headerlink" title="Repetition Cases"></a>Repetition Cases</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -792,7 +803,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Nongreedy-repetition"><a href="#Nongreedy-repetition" class="headerlink" title="Nongreedy repetition"></a>Nongreedy repetition</h3><table>
+<h2 id="Nongreedy-repetition"><a href="#Nongreedy-repetition" class="headerlink" title="Nongreedy repetition"></a>Nongreedy repetition</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -810,7 +821,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Grouping-with-Parentheses"><a href="#Grouping-with-Parentheses" class="headerlink" title="Grouping with Parentheses"></a>Grouping with Parentheses</h3><table>
+<h2 id="Grouping-with-Parentheses"><a href="#Grouping-with-Parentheses" class="headerlink" title="Grouping with Parentheses"></a>Grouping with Parentheses</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -832,7 +843,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Backreferences"><a href="#Backreferences" class="headerlink" title="Backreferences"></a>Backreferences</h3><table>
+<h2 id="Backreferences"><a href="#Backreferences" class="headerlink" title="Backreferences"></a>Backreferences</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -850,7 +861,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h3><p>用竖线<code>|</code>实现字符匹配中的<code>或</code>关系。</p>
+<h2 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h2><p>用竖线<code>|</code>实现字符匹配中的<code>或</code>关系。</p>
 <table>
 <thead>
 <tr>
@@ -861,22 +872,19 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>**python\</td>
-<td>perl**<br>Match “python” or “perl”</td>
+<td><strong>python&#124;perl</strong><br>Match “python” or “perl”</td>
 </tr>
 <tr>
 <td>2</td>
-<td>**rub(y\</td>
-<td>le))**<br>Match “ruby” or “ruble”</td>
+<td><strong>rub(y&#124;le))</strong><br>Match “ruby” or “ruble”</td>
 </tr>
 <tr>
 <td>3</td>
-<td>**Python(!+\</td>
-<td>\?)**<br>“Python” followed by one or more ! or one ?</td>
+<td><strong>Python(!+&#124;\?)</strong><br>“Python” followed by one or more ! or one ?</td>
 </tr>
 </tbody>
 </table>
-<h3 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h3><p>以下例子约束了字符所在的位置。</p>
+<h2 id="Anchors"><a href="#Anchors" class="headerlink" title="Anchors"></a>Anchors</h2><p>以下例子约束了字符所在的位置。</p>
 <table>
 <thead>
 <tr>
@@ -919,7 +927,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Special-Syntax-with-Parentheses"><a href="#Special-Syntax-with-Parentheses" class="headerlink" title="Special Syntax with Parentheses"></a>Special Syntax with Parentheses</h3><table>
+<h2 id="Special-Syntax-with-Parentheses"><a href="#Special-Syntax-with-Parentheses" class="headerlink" title="Special Syntax with Parentheses"></a>Special Syntax with Parentheses</h2><table>
 <thead>
 <tr>
 <th>Sr.No.</th>
@@ -941,8 +949,7 @@
 </tr>
 <tr>
 <td>4</td>
-<td>**rub(?:y\</td>
-<td>le))**<br>Group only without creating \1 backreference</td>
+<td><strong>rub(?:y&#124;le))</strong><br>Group only without creating \1 backreference</td>
 </tr>
 </tbody>
 </table>
@@ -1163,7 +1170,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问号（？）"><span class="nav-number">1.1.</span> <span class="nav-text">问号（？）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加号（-）"><span class="nav-number">1.2.</span> <span class="nav-text">加号（+）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星号（-）"><span class="nav-number">1.3.</span> <span class="nav-text">星号（*）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组"><span class="nav-number">2.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匹配和查找"><span class="nav-number">3.</span> <span class="nav-text">匹配和查找</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Regular-Expression-Modifiers"><span class="nav-number">3.1.</span> <span class="nav-text">Regular Expression Modifiers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regular-Expression-Patterns"><span class="nav-number">3.2.</span> <span class="nav-text">Regular Expression Patterns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式举例"><span class="nav-number">3.3.</span> <span class="nav-text">正则表达式举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Literal-characters"><span class="nav-number">3.3.1.</span> <span class="nav-text">Literal characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Character-classes"><span class="nav-number">3.3.2.</span> <span class="nav-text">Character classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-Character-Classes"><span class="nav-number">3.3.3.</span> <span class="nav-text">Special Character Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repetition-Cases"><span class="nav-number">3.3.4.</span> <span class="nav-text">Repetition Cases</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nongreedy-repetition"><span class="nav-number">3.3.5.</span> <span class="nav-text">Nongreedy repetition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grouping-with-Parentheses"><span class="nav-number">3.3.6.</span> <span class="nav-text">Grouping with Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backreferences"><span class="nav-number">3.3.7.</span> <span class="nav-text">Backreferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alternatives"><span class="nav-number">3.3.8.</span> <span class="nav-text">Alternatives</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anchors"><span class="nav-number">3.3.9.</span> <span class="nav-text">Anchors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Special-Syntax-with-Parentheses"><span class="nav-number">3.3.10.</span> <span class="nav-text">Special Syntax with Parentheses</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问号（？）"><span class="nav-number">1.1.</span> <span class="nav-text">问号（？）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加号（-）"><span class="nav-number">1.2.</span> <span class="nav-text">加号（+）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星号（-）"><span class="nav-number">1.3.</span> <span class="nav-text">星号（*）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分组"><span class="nav-number">2.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匹配和查找"><span class="nav-number">3.</span> <span class="nav-text">匹配和查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Regular-Expression-Modifiers"><span class="nav-number">4.</span> <span class="nav-text">Regular Expression Modifiers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Regular-Expression-Patterns"><span class="nav-number">5.</span> <span class="nav-text">Regular Expression Patterns</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式举例"><span class="nav-number">6.</span> <span class="nav-text">正则表达式举例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Literal-characters"><span class="nav-number">6.1.</span> <span class="nav-text">Literal characters</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Character-classes"><span class="nav-number">6.2.</span> <span class="nav-text">Character classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Special-Character-Classes"><span class="nav-number">6.3.</span> <span class="nav-text">Special Character Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Repetition-Cases"><span class="nav-number">6.4.</span> <span class="nav-text">Repetition Cases</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nongreedy-repetition"><span class="nav-number">6.5.</span> <span class="nav-text">Nongreedy repetition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grouping-with-Parentheses"><span class="nav-number">6.6.</span> <span class="nav-text">Grouping with Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backreferences"><span class="nav-number">6.7.</span> <span class="nav-text">Backreferences</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Alternatives"><span class="nav-number">6.8.</span> <span class="nav-text">Alternatives</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchors"><span class="nav-number">6.9.</span> <span class="nav-text">Anchors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Special-Syntax-with-Parentheses"><span class="nav-number">6.10.</span> <span class="nav-text">Special Syntax with Parentheses</span></a></li></ol></li></ol></div>
             
 
           </div>
