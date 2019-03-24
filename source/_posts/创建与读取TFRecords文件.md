@@ -88,6 +88,33 @@ image_list = tf.gfile.Glob(file_glob)
 
 ## 将图片装入不同的集合
 
+在获取了每一类的`image_list`之后。接下来就要对每一类样本，都按训练集、测试集和验证集这三个集合分开。之后再将每一类的这三个集合组合起来，形成最终的训练集、测试集和验证集。对每一个样本文件，需要一个函数，来决定这个样本将进入哪个集合。这里采用了网上的一种方式（目前还不知道原作者是谁，网络上很多源代码都是这么干的）：
+
+```python
+training_images = []
+testing_images = []
+validation_images = []
+        
+for file_name in file_list: 
+	# e.g.
+    # file_name: './images/0/0#1.jpg'
+    # file_list: ['./images/0/0#1.jpg', './images/0/0#2.jpg', ...]
+            
+    hash_name = re.sub(r'_nohash_.*$', '', file_name)
+    hash_name_hashed = hashlib.sha1(tf.compat.as_bytes(hash_name)).hexdigest()
+            
+    percentage_hash = ((int(hash_name_hashed, 16) % (MAX_NUM_IMAGES_PER_CLASS + 1)) * (100.0 / MAX_NUM_IMAGES_PER_CLASS))
+            
+    if percentage_hash < validation_percentage:
+		validation_images.append(file_name)
+	elif percentage_hash < (testing_percentage + validation_percentage):
+		testing_images.append(file_name)
+	else:
+        training_images.append(file_name)        
+```
+
+里面通过哈希编码，只根据样本的文件名（含路径），来确定该文件是进入哪个集合。而且在文件名不变的情况下，同一个样本在每次操作都将进入同一个集合，不论是否加入了新的样本。因为哈希编码的结果只和文件名（含路径）有关。在对每一类样本都分开三个集合之后，下面就要将不同类之间的小集合组合起来。
+
 ```python
 def analysis_image_lists(image_lists):
     '''
@@ -132,4 +159,69 @@ def analysis_image_lists(image_lists):
 >
 >[参考链接](https://www.quora.com/In-Python-what-decides-the-order-that-a-loop-on-a-dictionary-works-through-the-keys).
 
-所以至此来说，制作成的`TFRecords`文件中样本的顺序，在每次制作时就应该认为是不固定的了。那么看来就没必要保持每次制作数据集时样本的次序一致。在上面的函数中，干脆加入了`random.shuffle()`，来让它乱的彻底一点。
+所以至此来说，制作成的`TFRecords`文件中样本的顺序，在每次制作时就应该认为是不固定的了。那么看来就没必要保持每次制作数据集时样本的次序一致。在上面的函数中，干脆加入了`random.shuffle()`，来让它乱的彻底一点。<span style="border-bottom:2px dashed yellow;">实际上，在从数据集中取样本用来训练模型的时候，也就是要尽量以一种均匀分布的概率来抽取样本。所以没必要在制作数据集的时候保持样本次序的稳定。这也是我一开始的一个误解。</span>以上作为一个例子，目的是说明在每次形成三个数据集的`image_list`的时候，文件的顺序很可能因为文件名的原因而发生改变。而我们现在对图片文件的命名规则为`class_index#image_index.extension`.例如：`0#1.jpg`代表第`0`类中的第`1`张图片。这种命名规则下文件的顺序始终是数字大小顺序，不过前面也说了，不用保持这种次序的稳定性。
+
+至此就制作好了训练集、测试集、验证集三个图片路径列表。
+
+# 读取TFRecords注意事项
+
+这里主要关注函数`tf.data.Dataset.shuffle(buffer_size)`。针对这个函数，做两点说明。一个是关于参数`buffer_size`的取值；一个是该函数与`tf.data.Dataset.batch()`的先后次序问题。
+
+## buffer_size的取值
+
+先来看`tf.data.Dataset.shuffle(buffer_size)`的工作过程：
+
+1. 在所有样本中按次序取前`buffer_size`个样本放入buffer中。
+
+{% asset_img 2.jpg %}
+
+2. 当读取数据时，每次从buffer中随机取出一个样本。
+
+{% asset_img 3.jpg %}
+
+3. 当buffer中取走数据后，会从所有样本中再按次序取下一个样本放入buffer。
+
+{% asset_img 4.jpg %}
+
+这一函数的作用就是避免一次性将整个数据集读入内存，但又能有随机性的取样本。读入内存的为`buffer_size`个样本，且在buffer中取样本为随机的。`buffer_size`和数据集样本总数的相对大小，将会影响取样本的过程对整个数据集而言的随机性。
+
+- buffer_size >= 样本总数。那么此时整个数据集都会被放进buffer里，取样本时，对于整个数据集来说就是完全随机的。每个样本被选到的概率符合均匀分布。
+
+- buffer_size == 1。这相当于依次取样本，并没有随机性。
+
+以上是两种极端情况。那么其实还是没有回答应该如何取一个中间值，既避免因数据集过大而导致占用内存过多，又可以使样本的选取具有一定随机性。这种值的选取应该是要结合具体任务的。总之，要尽量保证一个`batch`的样本中，各类别样本数尽量平均。比如做猫和狗的图片分类，`batchsize = 32`，那么这其中大致应有16张猫的图片和16张狗的图片。[参考链接](https://user-gold-cdn.xitu.io/2018/8/28/16580f396628e48b).
+
+## Dataset.shuffle与Dataset.batch的顺序
+
+除了`tf.data.Dataset.shuffle(buffer_size)`还有一个函数叫`tf.data.Dataset.batch(batch_size)`。这两个都是对数据集的一种操作。结论是`shuffle`应该在`batch`前面。因为如果先执行`tf.data.Dataset.batch()`，会在原数据集中，依次将每`batch_size`个样本作为一个整体输出。那么如果在此之前数据集并没有很好的打乱的话，按顺序把样本组合起来的话，可能会有`batch`中 样本类别分布不均匀的情况。以[参考链接](https://stackoverflow.com/questions/50437234/tensorflow-dataset-shuffle-then-batch-or-batch-then-shuffle)中的例子为例：
+
+```python
+tf.enable_eager_execution()  # To simplify the example code.
+
+# Batch before shuffle.
+dataset = tf.data.Dataset.from_tensor_slices([0, 0, 0, 1, 1, 1, 2, 2, 2])
+dataset = dataset.batch(3)
+dataset = dataset.shuffle(9)
+
+for elem in dataset:
+  print(elem)
+
+# Prints:
+# tf.Tensor([1 1 1], shape=(3,), dtype=int32)
+# tf.Tensor([2 2 2], shape=(3,), dtype=int32)
+# tf.Tensor([0 0 0], shape=(3,), dtype=int32)
+
+# Shuffle before batch.
+dataset = tf.data.Dataset.from_tensor_slices([0, 0, 0, 1, 1, 1, 2, 2, 2])
+dataset = dataset.shuffle(9)
+dataset = dataset.batch(3)
+
+for elem in dataset:
+  print(elem)
+
+# Prints:
+# tf.Tensor([2 0 2], shape=(3,), dtype=int32)
+# tf.Tensor([2 1 0], shape=(3,), dtype=int32)
+# tf.Tensor([0 1 1], shape=(3,), dtype=int32)
+```
+
