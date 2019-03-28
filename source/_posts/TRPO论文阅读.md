@@ -4,6 +4,10 @@ date: 2019-03-24 23:08:40
 tags: 论文阅读
 ---
 
+TRPO论文的推导过程。
+
+<!-- more -->
+
 # Trust Region Policy Optimization
 
 ```
