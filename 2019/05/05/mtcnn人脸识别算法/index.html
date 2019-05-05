@@ -96,25 +96,24 @@
 
 
 
-  <meta name="description" content="在用Python做图像数据增强时，有imgaug工具可以使用。该工具中提供的数据增强方法有很多，在这篇文章中，只记录读到过的论文中涉及到的数据增强方法，作为参考。论文按照计算机视觉的不同研究方向分类，如人体姿态估计、目标识别，等等。">
-<meta name="keywords" content="深度学习基础">
+  <meta name="description" content="http://www.sfinst.com/?p=1683">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像数据增强">
-<meta property="og:url" content="http://yoursite.com/2019/04/15/图像数据增强/index.html">
+<meta property="og:title" content="mtcnn人脸识别算法">
+<meta property="og:url" content="http://yoursite.com/2019/05/05/mtcnn人脸识别算法/index.html">
 <meta property="og:site_name" content="Jairo">
-<meta property="og:description" content="在用Python做图像数据增强时，有imgaug工具可以使用。该工具中提供的数据增强方法有很多，在这篇文章中，只记录读到过的论文中涉及到的数据增强方法，作为参考。论文按照计算机视觉的不同研究方向分类，如人体姿态估计、目标识别，等等。">
+<meta property="og:description" content="http://www.sfinst.com/?p=1683">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-01T02:33:51.647Z">
+<meta property="og:updated_time" content="2019-05-05T09:45:53.010Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像数据增强">
-<meta name="twitter:description" content="在用Python做图像数据增强时，有imgaug工具可以使用。该工具中提供的数据增强方法有很多，在这篇文章中，只记录读到过的论文中涉及到的数据增强方法，作为参考。论文按照计算机视觉的不同研究方向分类，如人体姿态估计、目标识别，等等。">
+<meta name="twitter:title" content="mtcnn人脸识别算法">
+<meta name="twitter:description" content="http://www.sfinst.com/?p=1683">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/15/图像数据增强/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/05/mtcnn人脸识别算法/">
 
 
 
@@ -124,7 +123,7 @@
   };
 </script>
 
-  <title>图像数据增强 | Jairo</title>
+  <title>mtcnn人脸识别算法 | Jairo</title>
   
 
 
@@ -306,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/图像数据增强/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/mtcnn人脸识别算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jairo">
@@ -323,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图像数据增强
+          <h1 class="post-title" itemprop="name headline">mtcnn人脸识别算法
 
               
             
@@ -349,24 +348,12 @@
                 
               
 
-              <time title="创建时间：2019-04-15 21:48:05" itemprop="dateCreated datePublished" datetime="2019-04-15T21:48:05+08:00">2019-04-15</time>
+              <time title="创建时间：2019-05-05 17:45:41 / 修改时间：17:45:53" itemprop="dateCreated datePublished" datetime="2019-05-05T17:45:41+08:00">2019-05-05</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-01 10:33:51" itemprop="dateModified" datetime="2019-05-01T10:33:51+08:00">2019-05-01</time>
               
             
           </span>
@@ -384,8 +371,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/04/15/图像数据增强/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/15/图像数据增强/" itemprop="commentCount"></span>
+                <a href="/2019/05/05/mtcnn人脸识别算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/05/mtcnn人脸识别算法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,9 +407,7 @@
       
 
       
-        <p>在用Python做图像数据增强时，有<a href="https://imgaug.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">imgaug</a>工具可以使用。该工具中提供的数据增强方法有很多，在这篇文章中，只记录读到过的论文中涉及到的数据增强方法，作为参考。论文按照计算机视觉的不同研究方向分类，如人体姿态估计、目标识别，等等。</p>
-<a id="more"></a>
-<h1 id="人体姿态估计"><a href="#人体姿态估计" class="headerlink" title="人体姿态估计"></a>人体姿态估计</h1><h2 id="stacked-hourglass-network"><a href="#stacked-hourglass-network" class="headerlink" title="stacked hourglass network"></a>stacked hourglass network</h2><p>论文<a href="https://arxiv.org/abs/1603.06937" target="_blank" rel="noopener">链接</a>。</p>
+        <p><a href="http://www.sfinst.com/?p=1683" target="_blank" rel="noopener">http://www.sfinst.com/?p=1683</a></p>
 
       
     </div>
@@ -444,12 +429,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/深度学习基础/" rel="tag"># 深度学习基础</a>
-          
-        </div>
-      
 
       
       
@@ -459,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/31/用matplotlib画图/" rel="next" title="用matplotlib画图">
-                <i class="fa fa-chevron-left"></i> 用matplotlib画图
+              <a href="/2019/05/04/深度学习中的正则化操作/" rel="next" title="深度学习中的正则化操作">
+                <i class="fa fa-chevron-left"></i> 深度学习中的正则化操作
               </a>
             
           </div>
@@ -468,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/04/深度学习中的正则化操作/" rel="prev" title="深度学习中的正则化操作">
-                深度学习中的正则化操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -519,17 +494,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -631,23 +597,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#人体姿态估计"><span class="nav-number">1.</span> <span class="nav-text">人体姿态估计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stacked-hourglass-network"><span class="nav-number">1.1.</span> <span class="nav-text">stacked hourglass network</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
