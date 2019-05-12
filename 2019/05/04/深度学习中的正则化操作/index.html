@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516">
+  <meta name="description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516 https://blog.csdn.net/liuxiao214/article/deta">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习中的正则化操作">
 <meta property="og:url" content="http://yoursite.com/2019/05/04/深度学习中的正则化操作/index.html">
 <meta property="og:site_name" content="Jairo">
-<meta property="og:description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516">
+<meta property="og:description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516 https://blog.csdn.net/liuxiao214/article/deta">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-04T15:38:21.315Z">
+<meta property="og:updated_time" content="2019-05-07T08:08:46.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习中的正则化操作">
-<meta name="twitter:description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516">
+<meta name="twitter:description" content="https://blog.csdn.net/u014380165/article/details/79810040 https://zhuanlan.zhihu.com/p/35005794 https://blog.csdn.net/qq_25737169/article/details/79048516 https://blog.csdn.net/liuxiao214/article/deta">
 
 
 
@@ -348,12 +348,24 @@
                 
               
 
-              <time title="创建时间：2019-05-04 23:34:56 / 修改时间：23:38:21" itemprop="dateCreated datePublished" datetime="2019-05-04T23:34:56+08:00">2019-05-04</time>
+              <time title="创建时间：2019-05-04 23:34:56" itemprop="dateCreated datePublished" datetime="2019-05-04T23:34:56+08:00">2019-05-04</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-07 16:08:46" itemprop="dateModified" datetime="2019-05-07T16:08:46+08:00">2019-05-07</time>
               
             
           </span>
@@ -410,7 +422,11 @@
         <p><a href="https://blog.csdn.net/u014380165/article/details/79810040" target="_blank" rel="noopener">https://blog.csdn.net/u014380165/article/details/79810040</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/35005794" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35005794</a></p>
 <p><a href="https://blog.csdn.net/qq_25737169/article/details/79048516" target="_blank" rel="noopener">https://blog.csdn.net/qq_25737169/article/details/79048516</a></p>
-
+<p><a href="https://blog.csdn.net/liuxiao214/article/details/81037416" target="_blank" rel="noopener">https://blog.csdn.net/liuxiao214/article/details/81037416</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1097463" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1097463</a></p>
+<h1 id="问题引出"><a href="#问题引出" class="headerlink" title="问题引出"></a>问题引出</h1><p>​        对于神经网络，首先假设其优化算法为mini-batch SGD。在深度学习中，神经网络包含多个隐层，在模型训练的过程中，各个隐层的参数是不断在变化的。由于这种参数的变化，导致各个隐层的输入数据的分布也在不断变化。这一现象称为<code>Internal Covariate Shift</code>。batchnorm的目的是想让每个隐层的输入数据的分布稳定不变。</p>
+<p>​        在用神经网络进行图像处理时，对整个模型的输入图像向量进行白化操作的话，会使神经网络较快的收敛。白化操作是指将图像数据转换为满足均值为零，单位方差的正态分布。以此为启发，在多个隐层的神经网络中，每一层的输出都是下一层的输入，batchnorm就是对每一层的输入数据都做一次简化的白化操作。对于每一个隐层来说，这种处理会减小输入数据的绝对差距，而保留相对差距。当这种相对差距满足我们想学习的分布时，batchnorm操作是有益的。而如果我们想学习的分布体现在数据的绝对差距中，那么则不适合使用batchnorm操作。</p>
+<h1 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h1>
       
     </div>
 
@@ -500,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,7 +543,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -603,6 +628,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引出"><span class="nav-number">1.</span> <span class="nav-text">问题引出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法流程"><span class="nav-number">2.</span> <span class="nav-text">算法流程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
